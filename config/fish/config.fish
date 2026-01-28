@@ -49,6 +49,7 @@ function fish_prompt
     else
         set_color red
     end
+
     echo -n " λ "
     set_color normal
 end
@@ -61,12 +62,11 @@ set -gx VISUAL hx
 
 alias ls 'ls --color=auto'
 alias ll 'ls -lah'
-alias g git
 alias gs 'git status'
 alias gd 'git diff'
 alias gl 'git log --oneline --graph'
-alias gup 'git fetch --all --prune && git pull'
-alias gst 'git status --short --branch'
+alias gu 'git fetch --all --prune && git pull'
+alias gs 'git status --short --branch'
 
 # ----
 
