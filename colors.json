@@ -1,0 +1,356 @@
+{
+    "colors": {
+        "hex": {
+            "COLOR_ANSI_BLACK": "#43423f",
+            "COLOR_ANSI_BLACK_DIM": "#111110",
+            "COLOR_ANSI_BLACK_LIGHT": "#ebdbbc",
+            "COLOR_ANSI_BLUE": "#73728e",
+            "COLOR_ANSI_BLUE_DIM": "#3d3c4d",
+            "COLOR_ANSI_BLUE_LIGHT": "#dbdafc",
+            "COLOR_ANSI_CYAN": "#76bcbe",
+            "COLOR_ANSI_CYAN_DIM": "#4c7d7d",
+            "COLOR_ANSI_CYAN_LIGHT": "#b2e6e7",
+            "COLOR_ANSI_GREEN": "#8fbaa2",
+            "COLOR_ANSI_GREEN_DIM": "#5e7b6a",
+            "COLOR_ANSI_GREEN_LIGHT": "#bbe7cd",
+            "COLOR_ANSI_MAGENTA": "#cda3cc",
+            "COLOR_ANSI_MAGENTA_DIM": "#886b88",
+            "COLOR_ANSI_MAGENTA_LIGHT": "#f4d3f3",
+            "COLOR_ANSI_RED": "#e4a093",
+            "COLOR_ANSI_RED_DIM": "#986960",
+            "COLOR_ANSI_RED_LIGHT": "#fcd4cd",
+            "COLOR_ANSI_WHITE": "#b4b0a9",
+            "COLOR_ANSI_WHITE_DIM": "#777470",
+            "COLOR_ANSI_WHITE_LIGHT": "#ebdbbc",
+            "COLOR_ANSI_YELLOW": "#b8b284",
+            "COLOR_ANSI_YELLOW_DIM": "#797556",
+            "COLOR_ANSI_YELLOW_LIGHT": "#e3debb",
+            "COLOR_COMMENT_FG": "#857d74",
+            "COLOR_CURSOR_BG": "#a8b8fd",
+            "COLOR_ERROR_BG": "#352837",
+            "COLOR_ERROR_FG": "#d9ace3",
+            "COLOR_KEYWORD_FG_ALT": "#aec392",
+            "COLOR_KEYWORD_FG": "#94c7a2",
+            "COLOR_NORMAL_BG": "#23211f",
+            "COLOR_NORMAL_BG_ALT": "#2e2c29",
+            "COLOR_NORMAL_FG_ALT": "#b7aca0",
+            "COLOR_NORMAL_FG": "#c5baac",
+            "COLOR_PUNCTUATION_ACTIVE_BG": "#564f46",
+            "COLOR_PUNCTUATION_ACTIVE_FG": "#fba5a2",
+            "COLOR_PUNCTUATION_FAINT_BG": "#4a2d2c",
+            "COLOR_PUNCTUATION_FG": "#ab6f6d",
+            "COLOR_SELECTION_BG_ALT": "#233741",
+            "COLOR_SELECTION_BG": "#303444",
+            "COLOR_STRING_FG_ALT": "#e3b28c",
+            "COLOR_STRING_FG": "#cbbb83",
+            "COLOR_TYPE_FG": "#b6ac9f",
+            "COLOR_UI_LEVEL_1_BG": "#292724",
+            "COLOR_UI_LEVEL_1_FG": "#564f46",
+            "COLOR_UI_LEVEL_2_BG": "#2f2c28",
+            "COLOR_UI_LEVEL_2_FG": "#90826e",
+            "COLOR_UI_LEVEL_3_BG": "#35322d",
+            "COLOR_UI_LEVEL_3_FG": "#d1b893",
+            "COLOR_VISIBLE_WHITESPACE_FG": "#3c3327",
+            "BG_ERR": "#352837",
+            "BG_WARN": "#2b2a3a",
+            "BG_INFO": "#37291e",
+            "BG_HINT": "#3b2727",
+            "FG_ERR": "#a6716a",
+            "FG_WARN": "#a1755e",
+            "FG_INFO": "#618775",
+            "FG_HINT": "#5e8779"
+        },
+        "rgb": {
+            "COLOR_ANSI_BLACK": {
+                "r": 67,
+                "g": 66,
+                "b": 63
+            },
+            "COLOR_ANSI_BLACK_DIM": {
+                "r": 17,
+                "g": 17,
+                "b": 16
+            },
+            "COLOR_ANSI_BLACK_LIGHT": {
+                "r": 235,
+                "g": 219,
+                "b": 188
+            },
+            "COLOR_ANSI_BLUE": {
+                "r": 115,
+                "g": 114,
+                "b": 142
+            },
+            "COLOR_ANSI_BLUE_DIM": {
+                "r": 61,
+                "g": 60,
+                "b": 77
+            },
+            "COLOR_ANSI_BLUE_LIGHT": {
+                "r": 219,
+                "g": 218,
+                "b": 252
+            },
+            "COLOR_ANSI_CYAN": {
+                "r": 118,
+                "g": 188,
+                "b": 190
+            },
+            "COLOR_ANSI_CYAN_DIM": {
+                "r": 76,
+                "g": 125,
+                "b": 125
+            },
+            "COLOR_ANSI_CYAN_LIGHT": {
+                "r": 178,
+                "g": 230,
+                "b": 231
+            },
+            "COLOR_ANSI_GREEN": {
+                "r": 143,
+                "g": 186,
+                "b": 162
+            },
+            "COLOR_ANSI_GREEN_DIM": {
+                "r": 94,
+                "g": 123,
+                "b": 106
+            },
+            "COLOR_ANSI_GREEN_LIGHT": {
+                "r": 187,
+                "g": 231,
+                "b": 205
+            },
+            "COLOR_ANSI_MAGENTA": {
+                "r": 205,
+                "g": 163,
+                "b": 204
+            },
+            "COLOR_ANSI_MAGENTA_DIM": {
+                "r": 136,
+                "g": 107,
+                "b": 136
+            },
+            "COLOR_ANSI_MAGENTA_LIGHT": {
+                "r": 244,
+                "g": 211,
+                "b": 243
+            },
+            "COLOR_ANSI_RED": {
+                "r": 228,
+                "g": 160,
+                "b": 147
+            },
+            "COLOR_ANSI_RED_DIM": {
+                "r": 152,
+                "g": 105,
+                "b": 96
+            },
+            "COLOR_ANSI_RED_LIGHT": {
+                "r": 252,
+                "g": 212,
+                "b": 205
+            },
+            "COLOR_ANSI_WHITE": {
+                "r": 180,
+                "g": 176,
+                "b": 169
+            },
+            "COLOR_ANSI_WHITE_DIM": {
+                "r": 119,
+                "g": 116,
+                "b": 112
+            },
+            "COLOR_ANSI_WHITE_LIGHT": {
+                "r": 235,
+                "g": 219,
+                "b": 188
+            },
+            "COLOR_ANSI_YELLOW": {
+                "r": 184,
+                "g": 178,
+                "b": 132
+            },
+            "COLOR_ANSI_YELLOW_DIM": {
+                "r": 121,
+                "g": 117,
+                "b": 86
+            },
+            "COLOR_ANSI_YELLOW_LIGHT": {
+                "r": 227,
+                "g": 222,
+                "b": 187
+            },
+            "COLOR_COMMENT_FG": {
+                "r": 133,
+                "g": 125,
+                "b": 116
+            },
+            "COLOR_CURSOR_BG": {
+                "r": 168,
+                "g": 184,
+                "b": 253
+            },
+            "COLOR_ERROR_BG": {
+                "r": 53,
+                "g": 40,
+                "b": 55
+            },
+            "COLOR_ERROR_FG": {
+                "r": 217,
+                "g": 172,
+                "b": 227
+            },
+            "COLOR_KEYWORD_FG_ALT": {
+                "r": 174,
+                "g": 195,
+                "b": 146
+            },
+            "COLOR_KEYWORD_FG": {
+                "r": 148,
+                "g": 199,
+                "b": 162
+            },
+            "COLOR_NORMAL_BG": {
+                "r": 35,
+                "g": 33,
+                "b": 31
+            },
+            "COLOR_NORMAL_BG_ALT": {
+                "r": 46,
+                "g": 44,
+                "b": 41
+            },
+            "COLOR_NORMAL_FG_ALT": {
+                "r": 183,
+                "g": 172,
+                "b": 160
+            },
+            "COLOR_NORMAL_FG": {
+                "r": 197,
+                "g": 186,
+                "b": 172
+            },
+            "COLOR_PUNCTUATION_ACTIVE_BG": {
+                "r": 86,
+                "g": 79,
+                "b": 70
+            },
+            "COLOR_PUNCTUATION_ACTIVE_FG": {
+                "r": 251,
+                "g": 165,
+                "b": 162
+            },
+            "COLOR_PUNCTUATION_FAINT_BG": {
+                "r": 74,
+                "g": 45,
+                "b": 44
+            },
+            "COLOR_PUNCTUATION_FG": {
+                "r": 171,
+                "g": 111,
+                "b": 109
+            },
+            "COLOR_SELECTION_BG_ALT": {
+                "r": 35,
+                "g": 55,
+                "b": 65
+            },
+            "COLOR_SELECTION_BG": {
+                "r": 48,
+                "g": 52,
+                "b": 68
+            },
+            "COLOR_STRING_FG_ALT": {
+                "r": 227,
+                "g": 178,
+                "b": 140
+            },
+            "COLOR_STRING_FG": {
+                "r": 203,
+                "g": 187,
+                "b": 131
+            },
+            "COLOR_TYPE_FG": {
+                "r": 182,
+                "g": 172,
+                "b": 159
+            },
+            "COLOR_UI_LEVEL_1_BG": {
+                "r": 41,
+                "g": 39,
+                "b": 36
+            },
+            "COLOR_UI_LEVEL_1_FG": {
+                "r": 86,
+                "g": 79,
+                "b": 70
+            },
+            "COLOR_UI_LEVEL_2_BG": {
+                "r": 47,
+                "g": 44,
+                "b": 40
+            },
+            "COLOR_UI_LEVEL_2_FG": {
+                "r": 144,
+                "g": 130,
+                "b": 110
+            },
+            "COLOR_UI_LEVEL_3_BG": {
+                "r": 53,
+                "g": 50,
+                "b": 45
+            },
+            "COLOR_UI_LEVEL_3_FG": {
+                "r": 209,
+                "g": 184,
+                "b": 147
+            },
+            "COLOR_VISIBLE_WHITESPACE_FG": {
+                "r": 60,
+                "g": 51,
+                "b": 39
+            },
+            "BG_ERR": {
+                "r": 53,
+                "g": 40,
+                "b": 55
+            },
+            "BG_WARN": {
+                "r": 43,
+                "g": 42,
+                "b": 58
+            },
+            "BG_INFO": {
+                "r": 55,
+                "g": 41,
+                "b": 30
+            },
+            "BG_HINT": {
+                "r": 59,
+                "g": 39,
+                "b": 39
+            },
+            "FG_ERR": {
+                "r": 166,
+                "g": 113,
+                "b": 106
+            },
+            "FG_WARN": {
+                "r": 161,
+                "g": 117,
+                "b": 94
+            },
+            "FG_INFO": {
+                "r": 97,
+                "g": 135,
+                "b": 117
+            },
+            "FG_HINT": {
+                "r": 94,
+                "g": 135,
+                "b": 121
+            }
+        }
+    }
+}
