@@ -9,6 +9,10 @@
       url = ./colors.json;
       flake = false;
     };
+    configs = {
+      url = ./config;
+      flake = false;
+    };
   };
 
   outputs =
@@ -25,6 +29,7 @@
         };
 
         hx = inputs.hx.packages.${system}.default;
+        configPath = inputs.configs;
       in
       rec {
         packages = {
@@ -41,8 +46,8 @@
             pkgs.gitui
           ];
           shellHook = ''
-            # Set up config paths
-            export SHELL_CONFIG_ROOT="$(pwd)/config"
+            # Set up config paths from Nix store
+            export SHELL_CONFIG_ROOT="${configPath}"
 
             # Fish config
             export XDG_CONFIG_HOME="$SHELL_CONFIG_ROOT"

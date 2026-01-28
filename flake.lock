@@ -26,6 +26,18 @@
         "hx"
       ]
     },
+    "configs": {
+      "flake": false,
+      "locked": {
+        "path": "config",
+        "type": "path"
+      },
+      "original": {
+        "path": "config",
+        "type": "path"
+      },
+      "parent": []
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -149,6 +161,7 @@
     "root": {
       "inputs": {
         "colors": "colors",
+        "configs": "configs",
         "flake-utils": "flake-utils",
         "hx": "hx",
         "nixpkgs": "nixpkgs_3"
