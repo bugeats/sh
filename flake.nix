@@ -48,9 +48,12 @@
         };
 
         devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            packages.default
-          ] ++ stack;
+          packages =
+            with pkgs;
+            [
+              packages.default
+            ]
+            ++ stack;
 
           shellHook = ''
             # Set up config paths from Nix store
@@ -75,13 +78,13 @@
     );
 }
 
-            # if [ -z "$TMUX" ]; then
-            #   echo "Starting tmux session..."
-            #   exec tmux -f $TMUX_CONF new-session fish
-            # else
-            #   echo "Already in tmux session"
-            #   # Start fish shell if not already in fish
-            #   if [ "$SHELL" != "$(which fish)" ]; then
-            #     exec fish
-            #   fi
-            # fi
+# if [ -z "$TMUX" ]; then
+#   echo "Starting tmux session..."
+#   exec tmux -f $TMUX_CONF new-session fish
+# else
+#   echo "Already in tmux session"
+#   # Start fish shell if not already in fish
+#   if [ "$SHELL" != "$(which fish)" ]; then
+#     exec fish
+#   fi
+# fi
