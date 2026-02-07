@@ -28,24 +28,30 @@
           config.allowUnfree = true;
         };
 
+        stack = with pkgs; [
+          nixfmt
+          git
+          fish
+          tmux
+          gitui
+          terminaltexteffects
+          zellij
+        ];
+
         hx = inputs.hx.packages.${system}.default;
         configPath = inputs.configs;
       in
       rec {
         packages = {
           # TODO
-          default = pkgs.hello;
+          default = pkgs.alacritty;
         };
 
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             packages.default
-            git
-            fish
-            tmux
-            gitui
-            terminaltexteffects
-          ];
+          ] ++ stack;
+
           shellHook = ''
             # Set up config paths from Nix store
             export SHELL_CONFIG_ROOT="${configPath}"
@@ -57,21 +63,25 @@
             export TMUX_CONF="$SHELL_CONFIG_ROOT/tmux/tmux.conf"
             alias tmux='tmux -f $TMUX_CONF'
 
-            echo -e "bugeats\n    mode\n        engaged" | tte slide
+            echo -e "\nbugeats\n    mode\n        engaged\n" | tte slide
 
-            # Start tmux if not already in a tmux session
-            if [ -z "$TMUX" ]; then
-              echo "Starting tmux session..."
-              exec tmux -f $TMUX_CONF new-session fish
-            else
-              echo "Already in tmux session"
-              # Start fish shell if not already in fish
-              if [ "$SHELL" != "$(which fish)" ]; then
-                exec fish
-              fi
+            # Start fish shell if not already in fish
+            if [ "$SHELL" != "$(which fish)" ]; then
+              exec fish
             fi
           '';
         };
       }
     );
 }
+
+            # if [ -z "$TMUX" ]; then
+            #   echo "Starting tmux session..."
+            #   exec tmux -f $TMUX_CONF new-session fish
+            # else
+            #   echo "Already in tmux session"
+            #   # Start fish shell if not already in fish
+            #   if [ "$SHELL" != "$(which fish)" ]; then
+            #     exec fish
+            #   fi
+            # fi
