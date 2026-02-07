@@ -38,12 +38,13 @@
         };
 
         devShells.default = pkgs.mkShell {
-          packages = [
+          packages = with pkgs; [
             packages.default
-            hx
-            pkgs.fish
-            pkgs.tmux
-            pkgs.gitui
+            git
+            fish
+            tmux
+            gitui
+            terminaltexteffects
           ];
           shellHook = ''
             # Set up config paths from Nix store
@@ -56,14 +57,7 @@
             export TMUX_CONF="$SHELL_CONFIG_ROOT/tmux/tmux.conf"
             alias tmux='tmux -f $TMUX_CONF'
 
-            echo "λ bugeats mode engaged λ"
-            echo ""
-            echo "Available tools:"
-            echo "  - hx     : Helix editor"
-            echo "  - fish   : Friendly interactive shell"
-            echo "  - tmux   : Terminal multiplexer"
-            echo "  - gitui  : Fast terminal UI for git"
-            echo ""
+            echo -e "bugeats\n    mode\n        engaged" | tte slide
 
             # Start tmux if not already in a tmux session
             if [ -z "$TMUX" ]; then
