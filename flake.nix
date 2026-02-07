@@ -49,7 +49,7 @@
           default = pkgs.alacritty;
         };
 
-        homeConfigurations."chadwick" = home-manager.lib.homeManagerConfiguration {
+        homeConfigurations."chadwick" = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [ ./home.nix ];
         };
