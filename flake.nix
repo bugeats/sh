@@ -5,10 +5,7 @@
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
     flake-utils.url = "github:numtide/flake-utils";
     hx.url = "github:bugeats/hx";
-    colors = {
-      url = ./colors.json;
-      flake = false;
-    };
+    colors.url = "path:./colors";
     configs = {
       url = ./config;
       flake = false;
@@ -41,6 +38,7 @@
         ];
 
         hx = inputs.hx.packages.${system}.default;
+        colors = inputs.colors.packages.${system}.default;
         configPath = inputs.configs;
       in
       rec {
