@@ -1,5 +1,5 @@
 {
-  description = "Fish shell environment of Chadwick Dahlquist";
+  description = "Portable shell environment of Chadwick Dahlquist";
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
@@ -26,6 +26,7 @@
 
         functions = import ./functions.nix system;
         starshipSettings = import ./starship.nix hexcolors;
+        gitconfigContent = import ./git.nix hexcolors;
 
         hx = inputs.hx.packages.${system}.default;
 
@@ -63,6 +64,8 @@
           )}
 
           echo '${builtins.toJSON starshipSettings}' | yj -jt > $out/starship.toml
+
+          cp ${pkgs.writeText "gitconfig" gitconfigContent} $out/gitconfig
         '';
       in
       {
@@ -73,6 +76,11 @@
             pkgs.starship
             pkgs.tmux
             pkgs.git
+            pkgs.git-lfs
+            pkgs.delta
+            pkgs.gh
+            pkgs.gh-dash
+            pkgs.mergiraf
             hx
           ];
           runtimeEnv = {

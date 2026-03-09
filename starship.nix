@@ -1,4 +1,3 @@
-# Starship prompt settings. Takes a hex colors attrset (from bugeats/colors).
 colors: {
   format = "$username$hostname$localip$shlvl$directory$git_branch$git_commit$git_state$git_metrics$git_status$nix_shell$env_var$sudo$cmd_duration$line_break$jobs$time$status$netns$shell$character";
 

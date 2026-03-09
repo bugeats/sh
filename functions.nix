@@ -1,5 +1,3 @@
-# Pure attrset: function name -> body string.
-# The `system` parameter is interpolated into `nix-dev` for flake eval.
 system: {
   gup = ''
     git fetch --all --prune
