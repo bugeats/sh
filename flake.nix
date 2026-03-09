@@ -27,6 +27,7 @@
         functions = import ./functions.nix system;
         starshipSettings = import ./starship.nix hexcolors;
         gitconfigContent = import ./git.nix hexcolors;
+        gituiTheme = import ./gitui.nix hexcolors;
 
         hx = inputs.hx.packages.${system}.default;
 
@@ -66,6 +67,9 @@
           echo '${builtins.toJSON starshipSettings}' | yj -jt > $out/starship.toml
 
           cp ${pkgs.writeText "gitconfig" gitconfigContent} $out/gitconfig
+
+          mkdir -p $out/gitui
+          cp ${pkgs.writeText "theme.ron" gituiTheme} $out/gitui/theme.ron
         '';
       in
       {
@@ -81,6 +85,7 @@
             pkgs.gh
             pkgs.gh-dash
             pkgs.mergiraf
+            pkgs.gitui
             hx
           ];
           runtimeEnv = {

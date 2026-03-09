@@ -1,6 +1,11 @@
 colors: {
   format = "$username$hostname$localip$shlvl$directory$git_branch$git_commit$git_state$git_metrics$git_status$nix_shell$env_var$sudo$cmd_duration$line_break$jobs$time$status$netns$shell$character";
 
+  character = {
+    success_symbol = "[𝝺](bold ${colors.COLOR_CURSOR_BG})";
+    error_symbol = "[𝝺](bold bright-red)";
+  };
+
   directory = {
     truncation_length = 80;
   };
