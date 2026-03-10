@@ -6,7 +6,7 @@ Portable shell environment launched via `nix run github:bugeats/sh --refresh`. B
 
 The flake builds a `config-dir` derivation assembling generated config files, then wraps `bootstrap.sh` with all runtime dependencies on PATH. Bootstrap creates ephemeral symlinks (`~/.config/fish/`, `~/.config/starship.toml`, `~/.gitconfig`, `~/.config/gitui/`), launches fish, and cleans up on exit — restoring any backed-up originals.
 
-Data modules (`functions.nix`, `starship.nix`, `git.nix`, `gitui.nix`) are pure functions producing config content from shared inputs (colors, system).
+Config modules come in two shapes: data modules (`starship.nix`, `git.nix`, `gitui.nix`) return pure content from shared inputs (colors); builder modules (`fish/`) take `pkgs` and return a derivation. The `fish/` directory encapsulates `default.nix` (config assembly) and `functions.nix` (function body data).
 
 ## Constraints
 
@@ -24,4 +24,4 @@ Files must be git-tracked before `nix build` can read them.
 
 ## Current Focus
 
-Gitui theme integration landed. Git config migration validated. Next: remove git and gitui references from `~/nix` once validated.
+Fish config extracted to `fish/` builder module. Data modules (`starship.nix`, `git.nix`, `gitui.nix`) remain as root-level pure functions. Next: remove git and gitui references from `~/nix` once validated.

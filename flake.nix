@@ -22,47 +22,17 @@
           (builtins.fromJSON (builtins.readFile "${inputs.colors.packages.${system}.json}/colors.json"))
           .colors.hex;
 
-        stripHash = color: builtins.substring 1 (-1) color;
-
-        functions = import ./functions.nix system;
+        fishConfigDir = import ./fish { inherit pkgs hexcolors system; };
         starshipSettings = import ./starship.nix hexcolors;
         gitconfigContent = import ./git.nix hexcolors;
         gituiTheme = import ./gitui.nix hexcolors;
 
         hx = inputs.hx.packages.${system}.default;
 
-        functionFiles = builtins.mapAttrs (
-          name: body:
-          pkgs.writeText "${name}.fish" ''
-            function ${name}
-            ${body}end
-          ''
-        ) functions;
-
-        configFish = pkgs.writeText "config.fish" ''
-          set --universal fish_color_search_match ${stripHash hexcolors.COLOR_COMMENT_FG}
-          set --universal fish_color_autosuggestion ${stripHash hexcolors.COLOR_COMMENT_FG}
-
-          if test -n "$IN_NIX_SHELL"
-              printf "nix shell:\n"
-              if test -n "$buildInputs"
-                  echo $buildInputs | tr ' ' '\n'
-              end
-          else
-              nix-dev
-          end
-
-          starship init fish | source
-        '';
-
         config-dir = pkgs.runCommand "sh-config" { nativeBuildInputs = [ pkgs.yj ]; } ''
-          mkdir -p $out/fish/functions
+          mkdir -p $out
 
-          cp ${configFish} $out/fish/config.fish
-
-          ${builtins.concatStringsSep "\n" (
-            pkgs.lib.mapAttrsToList (name: file: "cp ${file} $out/fish/functions/${name}.fish") functionFiles
-          )}
+          cp -r ${fishConfigDir} $out/fish
 
           echo '${builtins.toJSON starshipSettings}' | yj -jt > $out/starship.toml
 
