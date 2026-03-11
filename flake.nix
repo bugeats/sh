@@ -6,6 +6,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     colors.url = "github:bugeats/colors";
     hx.url = "github:bugeats/hx";
+    zellij-nix.url = "github:a-kenji/zellij-nix";
   };
 
   outputs =
@@ -18,16 +19,21 @@
       let
         pkgs = import inputs.nixpkgs { inherit system; };
 
-        hexcolors =
+        colors =
           (builtins.fromJSON (builtins.readFile "${inputs.colors.packages.${system}.json}/colors.json"))
-          .colors.hex;
+          .colors;
+
+        hexcolors = colors.hex;
+        rgbcolors = colors.rgb;
 
         fishConfigDir = import ./fish { inherit pkgs hexcolors system; };
         starshipSettings = import ./starship.nix hexcolors;
         gitconfigContent = import ./git.nix hexcolors;
         gituiTheme = import ./gitui.nix hexcolors;
+        zellijConfig = import ./zellij.nix rgbcolors;
 
         hx = inputs.hx.packages.${system}.default;
+        zellij = inputs.zellij-nix.packages.${system}.default;
 
         config-dir = pkgs.runCommand "sh-config" { nativeBuildInputs = [ pkgs.yj ]; } ''
           mkdir -p $out
@@ -40,6 +46,9 @@
 
           mkdir -p $out/gitui
           cp ${pkgs.writeText "theme.ron" gituiTheme} $out/gitui/theme.ron
+
+          mkdir -p $out/zellij
+          cp ${pkgs.writeText "config.kdl" zellijConfig} $out/zellij/config.kdl
         '';
       in
       {
@@ -57,6 +66,7 @@
             pkgs.mergiraf
             pkgs.gitui
             hx
+            zellij
           ];
           runtimeEnv = {
             SH_CONFIG = "${config-dir}";

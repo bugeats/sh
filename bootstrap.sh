@@ -2,6 +2,7 @@ fish_config="$HOME/.config/fish"
 starship_config="$HOME/.config/starship.toml"
 git_config="$HOME/.gitconfig"
 gitui_config="$HOME/.config/gitui"
+zellij_config="$HOME/.config/zellij"
 
 link_config() {
   if [ -f "$2" ] && [ ! -L "$2" ]; then
@@ -31,10 +32,13 @@ install_config() {
 
   mkdir -p "$gitui_config"
   link_config "$SH_CONFIG/gitui/theme.ron" "$gitui_config/theme.ron"
+
+  mkdir -p "$zellij_config"
+  link_config "$SH_CONFIG/zellij/config.kdl" "$zellij_config/config.kdl"
 }
 
 remove_managed_symlinks() {
-  for f in "$fish_config/config.fish" "$starship_config" "$git_config" "$gitui_config/theme.ron" "$fish_config/functions/"*.fish; do
+  for f in "$fish_config/config.fish" "$starship_config" "$git_config" "$gitui_config/theme.ron" "$zellij_config/config.kdl" "$fish_config/functions/"*.fish; do
     if [ -L "$f" ] && [[ "$(readlink "$f")" == /nix/store/* ]]; then
       rm "$f"
     fi
@@ -48,6 +52,7 @@ on_exit() {
   restore_backup "$starship_config"
   restore_backup "$git_config"
   restore_backup "$gitui_config/theme.ron"
+  restore_backup "$zellij_config/config.kdl"
 }
 
 trap on_exit EXIT

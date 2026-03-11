@@ -27,7 +27,12 @@ system: {
   '';
 
   cls = ''
-    tmux clear-history
+    if set -q ZELLIJ
+        zellij action clear
+    else if set -q TMUX
+        tmux clear-history
+    end
+
     clear
   '';
 
@@ -64,6 +69,10 @@ system: {
 
   tmux-here = ''
     tmux-hack "$PWD"
+  '';
+
+  zj = ''
+    zellij attach --create (basename "$PWD")
   '';
 
   set-no-wrap = ''
