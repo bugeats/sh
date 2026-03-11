@@ -70,6 +70,9 @@
           ];
           runtimeEnv = {
             SH_CONFIG = "${config-dir}";
+            STARSHIP_CONFIG = "${config-dir}/starship.toml";
+            GIT_CONFIG_GLOBAL = "${config-dir}/gitconfig";
+            ZELLIJ_CONFIG_DIR = "${config-dir}/zellij";
           };
           text = builtins.readFile ./bootstrap.sh;
         };
