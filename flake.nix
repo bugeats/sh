@@ -70,6 +70,9 @@
           ];
           runtimeEnv = {
             SH_CONFIG = "${config-dir}";
+            SHELL = "${pkgs.fish}/bin/fish";
+            EDITOR = "${hx}/bin/hx";
+            VISUAL = "${hx}/bin/hx";
             STARSHIP_CONFIG = "${config-dir}/starship.toml";
             GIT_CONFIG_GLOBAL = "${config-dir}/gitconfig";
             ZELLIJ_CONFIG_DIR = "${config-dir}/zellij";
