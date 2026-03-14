@@ -4,7 +4,7 @@ Portable shell environment launched via `nix run github:bugeats/sh --refresh`. B
 
 ## Architecture
 
-The flake builds a `config-dir` derivation assembling generated config files, then wraps `bootstrap.sh` with all runtime dependencies on PATH. The wrapper sets two categories of env vars: runtime identity (`SHELL`, `EDITOR`, `VISUAL`) pointing to nix store binaries, and config paths (`STARSHIP_CONFIG`, `GIT_CONFIG_GLOBAL`, `ZELLIJ_CONFIG_DIR`) pointing to generated config files. Fish and gitui lack dedicated config env vars, so bootstrap symlinks those into `~/.config/`, restoring backups on exit.
+The flake builds a `config-dir` derivation assembling generated config files, then wraps `bootstrap.sh` with all runtime dependencies on PATH. The wrapper sets two categories of env vars: runtime identity (`SHELL`, `EDITOR`, `VISUAL`) pointing to nix store binaries, and config paths (`STARSHIP_CONFIG`, `GIT_CONFIG_GLOBAL`, `ZELLIJ_CONFIG_DIR`) pointing to generated config files. Fish and gitui lack dedicated config env vars, so bootstrap symlinks those into `~/.config/` (persisted across sessions; originals backed up with `.bugeats-was-here` suffix on first run).
 
 Config modules come in two shapes: data modules (`starship.nix`, `git.nix`, `gitui.nix`, `zellij.nix`) return pure content from shared inputs (colors); builder modules (`fish/`) take `{ pkgs, hexcolors, system }` and return a derivation. The `fish/` directory encapsulates `default.nix` (config assembly) and `functions.nix` (function body data).
 
