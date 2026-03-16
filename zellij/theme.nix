@@ -5,13 +5,6 @@ let
 in
 
 ''
-  default_shell "fish"
-  mouse_mode true
-  pane_frames true
-  scroll_buffer_size 200000
-  default_layout "compact"
-  theme "sh"
-
   themes {
     sh {
       fg ${rgb rgbcolors.COLOR_UI_LEVEL_3_FG}

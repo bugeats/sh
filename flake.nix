@@ -26,32 +26,25 @@
         hexcolors = colors.hex;
         rgbcolors = colors.rgb;
 
-        fishConfigDir = import ./fish { inherit pkgs hexcolors system; };
-        starshipSettings = import ./starship.nix hexcolors;
-        gitconfigContent = import ./git.nix hexcolors;
-        gituiTheme = import ./gitui.nix hexcolors;
-        zellijConfig = import ./zellij.nix rgbcolors;
-
         hx = inputs.hx.packages.${system}.default;
         zellij = inputs.zellij-nix.packages.${system}.default;
-
-        config-dir = pkgs.runCommand "sh-config" { nativeBuildInputs = [ pkgs.yj ]; } ''
-          mkdir -p $out
-
-          cp -r ${fishConfigDir} $out/fish
-
-          echo '${builtins.toJSON starshipSettings}' | yj -jt > $out/starship.toml
-
-          cp ${pkgs.writeText "gitconfig" gitconfigContent} $out/gitconfig
-
-          mkdir -p $out/gitui
-          cp ${pkgs.writeText "theme.ron" gituiTheme} $out/gitui/theme.ron
-
-          mkdir -p $out/zellij
-          cp ${pkgs.writeText "config.kdl" zellijConfig} $out/zellij/config.kdl
-        '';
       in
-      {
+      rec {
+        packages.fish-config = import ./fish { inherit pkgs hexcolors system; };
+
+        packages.starship-config = pkgs.runCommand "starship-config" { nativeBuildInputs = [ pkgs.yj ]; } ''
+          echo '${builtins.toJSON (import ./starship.nix hexcolors)}' | yj -jt > $out
+        '';
+
+        packages.git-config = pkgs.writeText "gitconfig" (import ./git.nix hexcolors);
+
+        packages.gitui-config = pkgs.runCommand "gitui-config" { } ''
+          mkdir -p $out
+          cp ${pkgs.writeText "theme.ron" (import ./gitui.nix hexcolors)} $out/theme.ron
+        '';
+
+        packages.zellij-config = import ./zellij { inherit pkgs rgbcolors; };
+
         packages.default = pkgs.writeShellApplication {
           name = "sh-bootstrap";
           runtimeInputs = [
@@ -69,13 +62,14 @@
             zellij
           ];
           runtimeEnv = {
-            SH_CONFIG = "${config-dir}";
             SHELL = "${pkgs.fish}/bin/fish";
             EDITOR = "${hx}/bin/hx";
             VISUAL = "${hx}/bin/hx";
-            STARSHIP_CONFIG = "${config-dir}/starship.toml";
-            GIT_CONFIG_GLOBAL = "${config-dir}/gitconfig";
-            ZELLIJ_CONFIG_DIR = "${config-dir}/zellij";
+            FISH_CONFIG = "${packages.fish-config}";
+            STARSHIP_CONFIG = "${packages.starship-config}";
+            GIT_CONFIG_GLOBAL = "${packages.git-config}";
+            GITUI_CONFIG = "${packages.gitui-config}";
+            ZELLIJ_CONFIG_DIR = "${packages.zellij-config}";
           };
           text = builtins.readFile ./bootstrap.sh;
         };
