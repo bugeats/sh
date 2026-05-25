@@ -6,7 +6,7 @@ Portable shell environment launched via `nix run github:bugeats/sh --refresh`. B
 
 Each config is an independent flake output package (`packages.*-config`), built to its own nix store path. The `packages.default` wrapper sets env vars pointing to these store paths and bundles all runtime dependencies on PATH. Fish and gitui lack dedicated config env vars, so `bootstrap.sh` symlinks those into `~/.config/` (persisted across sessions; originals backed up with `.bugeats-was-here` suffix on first run).
 
-Config modules come in two shapes: data modules (`starship.nix`, `git.nix`, `gitui.nix`) return pure content from shared inputs (colors); directory modules (`fish/`, `zellij/`) encapsulate config assembly via `default.nix`. The `zellij/` directory splits static KDL (`config.kdl`) from generated theme (`theme.nix`), concatenated at build time.
+Config modules come in two shapes: data modules (`starship.nix`, `git.nix`, `gitui.nix`) return pure content from shared inputs (colors); directory modules (`fish/`, `zellij/`) encapsulate config assembly via `default.nix`. The `zellij/` directory concatenates static KDL (`config.kdl`), generated keybinds (loop in `default.nix`), and generated theme (`theme.nix`); a startup layout under `layouts/default.kdl` pre-creates named tabs.
 
 Color values from `github:bugeats/colors` are extracted as both `hexcolors` (for text-format configs) and `rgbcolors` (for zellij's `R G B` theme format).
 
@@ -27,4 +27,14 @@ Files must be git-tracked before `nix build` can read them.
 
 ## Current Focus
 
-Zellij integrated alongside tmux for evaluation; `zj` launches zellij, `tmux-here` launches tmux. Goal is to replace tmux with zellij.
+Full zellij keybind set lands under `Super+Alt+<key>` as a `shared_except "locked"` block with `clear-defaults=true` — all `Ctrl*`/`Alt*` defaults are gone so they don't fight Helix. Modes are unreachable in the daily path; only Normal and Locked are ever entered (`Super+Alt+g` toggles Locked). Lowercase only — no Shift in any bind.
+
+The translation followed `~/nix/home/keybindings.nix`. Behavioral divergences from the tmux setup, captured here so they're not relitigated:
+- `w`/`q` (CloseTab/CloseFocus) have **no confirm prompt** — zellij's `Confirm` action only answers an already-displayed prompt; there's no analog to tmux's `confirm -p`.
+- Layout rotation (`,`/`.`) is dropped — zellij has no built-in layout presets, only user-defined swap layouts.
+- `Super+Alt+0` opens the session-manager plugin (replaces tmux's `choose-tree`); `Super+Alt+n` is intentionally unbound.
+- `1..9` still shell out to `zellij action go-to-tab-name <n> --create` because `GoToTabName` is CLI-only in zellij 0.44.3 (`kdl/mod.rs` parser only handles numeric `GoToTab`). Pane flash on each press is accepted.
+
+Tab naming and order are addressed by `layouts/default.kdl` pre-creating `1`/`2`/`3` — zellij's empty-name fallback (`tab/mod.rs:763`) renders as `Tab #N` and `new_tab` appends at `tabs.len()` (`screen.rs:2861`).
+
+Long-term goal stands: retire tmux. It's still in `flake.nix` `runtimeInputs` — remove once zellij has settled as the daily driver.

@@ -1,10 +1,56 @@
 { pkgs, rgbcolors }:
 
 let
+  inherit (pkgs) lib;
   theme = import ./theme.nix rgbcolors;
+
+  bind = key: action: ''bind "Super Alt ${key}" { ${action}; }'';
+
+  tabBind =
+    n:
+    bind (toString n) ''Run "zellij" "action" "go-to-tab-name" "${toString n}" "--create" { close_on_exit true; }'';
+
+  sharedBinds = [
+    (bind "h" ''MoveFocus "Left"'')
+    (bind "j" ''MoveFocus "Down"'')
+    (bind "k" ''MoveFocus "Up"'')
+    (bind "l" ''MoveFocus "Right"'')
+    (bind "y" ''Resize "Increase Left"'')
+    (bind "u" ''Resize "Increase Down"'')
+    (bind "i" ''Resize "Increase Up"'')
+    (bind "o" ''Resize "Increase Right"'')
+    (bind "s" ''NewPane "Right"'')
+    (bind "v" ''NewPane "Down"'')
+    (bind "t" "NewTab")
+    (bind "x" "Quit")
+    (bind "w" "CloseTab")
+    (bind "q" "CloseFocus")
+    (bind "g" ''SwitchToMode "Locked"'')
+    (bind "f" "ToggleFocusFullscreen")
+    (bind "c" "Clear")
+    (bind "e" "EditScrollback")
+    (bind "d" "Detach")
+    (bind "space" "ToggleFloatingPanes")
+    (bind "0" ''LaunchOrFocusPlugin "session-manager"'')
+  ]
+  ++ map tabBind (lib.range 1 9);
+
+  keybinds = ''
+    keybinds clear-defaults=true {
+        shared_except "locked" {
+            ${lib.concatStringsSep "\n        " sharedBinds}
+        }
+        locked {
+            ${bind "g" ''SwitchToMode "Normal"''}
+        }
+    }
+  '';
 in
 
 pkgs.runCommand "zellij-config" { } ''
-  mkdir -p $out
-  cat ${./config.kdl} ${pkgs.writeText "theme.kdl" theme} > $out/config.kdl
+  mkdir -p $out/layouts
+  cat ${./config.kdl} \
+      ${pkgs.writeText "keybinds.kdl" keybinds} \
+      ${pkgs.writeText "theme.kdl" theme} > $out/config.kdl
+  cp ${./layouts/default.kdl} $out/layouts/default.kdl
 ''

@@ -1,0 +1,5 @@
+layout {
+    tab name="1" { pane; }
+    tab name="2" { pane; }
+    tab name="3" { pane; }
+}
