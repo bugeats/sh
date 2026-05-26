@@ -3,12 +3,8 @@
 let
   inherit (pkgs) lib;
   theme = import ./theme.nix rgbcolors;
-
   bind = key: action: ''bind "Super Alt ${key}" { ${action}; }'';
-
-  tabBind =
-    n:
-    bind (toString n) ''Run "zellij" "action" "go-to-tab-name" "${toString n}" "--create" { close_on_exit true; }'';
+  tabBind = n: bind (toString n) ''GoToTab ${toString n}; SwitchToMode "Normal"'';
 
   sharedBinds = [
     (bind "h" ''MoveFocus "Left"'')

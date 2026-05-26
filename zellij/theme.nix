@@ -80,12 +80,20 @@ in
         emphasis_3 177 98 134
       }
       frame_selected {
-        base 152 151 26
+        base ${rgb rgbcolors.COLOR_UI_LEVEL_2_FG}
+        background ${rgb rgbcolors.COLOR_UI_LEVEL_2_BG}
+        emphasis_0 ${rgb rgbcolors.COLOR_UI_LEVEL_3_FG}
+        emphasis_1 ${rgb rgbcolors.COLOR_UI_LEVEL_2_FG}
+        emphasis_2 ${rgb rgbcolors.COLOR_UI_LEVEL_3_FG}
+        emphasis_3 ${rgb rgbcolors.COLOR_UI_LEVEL_2_FG}
+      }
+      frame_unselected {
+        base ${rgb rgbcolors.COLOR_UI_LEVEL_1_FG}
         background 0
-        emphasis_0 214 93 14
-        emphasis_1 104 157 106
-        emphasis_2 177 98 134
-        emphasis_3 0
+        emphasis_0 ${rgb rgbcolors.COLOR_UI_LEVEL_2_FG}
+        emphasis_1 ${rgb rgbcolors.COLOR_UI_LEVEL_1_FG}
+        emphasis_2 ${rgb rgbcolors.COLOR_UI_LEVEL_2_FG}
+        emphasis_3 ${rgb rgbcolors.COLOR_UI_LEVEL_1_FG}
       }
       frame_highlight {
         base 214 93 14
