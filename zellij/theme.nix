@@ -24,16 +24,16 @@ in
         emphasis_3 177 98 134
       }
       ribbon_selected {
-        base 60 56 54
-        background 152 151 26
+        base ${rgb rgbcolors.COLOR_UI_LEVEL_1_BG}
+        background ${rgb rgbcolors.COLOR_UI_LEVEL_1_FG}
         emphasis_0 204 36 29
         emphasis_1 214 93 14
         emphasis_2 177 98 134
         emphasis_3 69 133 136
       }
       ribbon_unselected {
-        base 60 56 54
-        background 235 219 178
+        base ${rgb rgbcolors.COLOR_UI_LEVEL_1_FG}
+        background ${rgb rgbcolors.COLOR_UI_LEVEL_1_BG}
         emphasis_0 204 36 29
         emphasis_1 251 241 199
         emphasis_2 69 133 136
