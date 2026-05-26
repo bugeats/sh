@@ -4,7 +4,7 @@ let
   inherit (pkgs) lib;
   theme = import ./theme.nix rgbcolors;
   bind = key: action: ''bind "Super Alt ${key}" { ${action}; }'';
-  tabBind = n: bind (toString n) ''GoToTab ${toString n}; SwitchToMode "Normal"'';
+  tabBind = n: bind (toString n) ''GoToTab ${toString n}'';
 
   sharedBinds = [
     (bind "h" ''MoveFocus "Left"'')
