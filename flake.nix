@@ -45,6 +45,15 @@
 
         packages.zellij-config = import ./zellij { inherit pkgs rgbcolors; };
 
+        packages.zj = pkgs.writeShellApplication {
+          name = "zj";
+          runtimeInputs = [ zellij ];
+          runtimeEnv.ZELLIJ_CONFIG_DIR = "${packages.zellij-config}";
+          text = ''
+            exec zellij attach --create "$(basename "$PWD")" "$@"
+          '';
+        };
+
         packages.default = pkgs.writeShellApplication {
           name = "sh-bootstrap";
           runtimeInputs = [
@@ -60,6 +69,7 @@
             pkgs.gitui
             hx
             zellij
+            packages.zj
           ];
           runtimeEnv = {
             SHELL = "${pkgs.fish}/bin/fish";

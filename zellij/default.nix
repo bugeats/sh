@@ -1,10 +1,13 @@
-{ pkgs, rgbcolors }:
+{
+  pkgs,
+  rgbcolors,
+}:
 
 let
   inherit (pkgs) lib;
   theme = import ./theme.nix rgbcolors;
   bind = key: action: ''bind "Super Alt ${key}" { ${action}; }'';
-  tabBind = n: bind (toString n) ''GoToTab ${toString n}'';
+  tabBind = n: bind (toString n) "GoToTab ${toString n}";
 
   sharedBinds = [
     (bind "h" ''MoveFocus "Left"'')
@@ -44,9 +47,8 @@ let
 in
 
 pkgs.runCommand "zellij-config" { } ''
-  mkdir -p $out/layouts
+  mkdir -p $out
   cat ${./config.kdl} \
       ${pkgs.writeText "keybinds.kdl" keybinds} \
       ${pkgs.writeText "theme.kdl" theme} > $out/config.kdl
-  cp ${./layouts/default.kdl} $out/layouts/default.kdl
 ''
