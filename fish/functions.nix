@@ -54,27 +54,6 @@ system: {
     echo "$head/$tail"
   '';
 
-  tmux-hack = ''
-    set hackPath $argv[1]
-    set session_name (path-short-display "$hackPath")
-    set watch_session_name "$session_name/watch"
-
-    tmux new-session -s "$session_name" -c "$PWD" -d
-    tmux new-session -s "$watch_session_name" -c "$PWD" -d
-    tmux switch-client -t "$session_name"
-    tmux new-window
-    tmux new-window
-    tmux select-window -t 1
-  '';
-
-  tmux-here = ''
-    tmux-hack "$PWD"
-  '';
-
-  zj = ''
-    zellij attach --create (basename "$PWD")
-  '';
-
   set-no-wrap = ''
     setterm -linewrap off
   '';
@@ -95,7 +74,15 @@ system: {
   '';
 
   mastodon = ''
-    ssh ssh://chadwick@mastodon.taho.it.com:8623
+    ssh ssh://chadwick@mastodon.taho.it.com:8623 -t 'nix run github:bugeats/sh'
+  '';
+
+  saturn = ''
+    ssh chadwick@saturn.local -t 'nix run github:bugeats/sh'
+  '';
+
+  bibi = ''
+    ssh chadwick@bibi.local -t 'nix run github:bugeats/sh'
   '';
 
   claude = ''
