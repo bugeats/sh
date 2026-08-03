@@ -25,12 +25,13 @@ let
     (bind "w" "CloseTab")
     (bind "q" "CloseFocus")
     (bind "g" ''SwitchToMode "Locked"'')
-    (bind "f" "ToggleFocusFullscreen")
     (bind "c" "Clear")
     (bind "e" "EditScrollback")
     (bind "d" "Detach")
-    (bind "space" "ToggleFloatingPanes")
+    (bind "f" ''SwitchToMode "EnterSearch"; SearchInput 0'')
     (bind "0" ''LaunchOrFocusPlugin "session-manager"'')
+    (bind "space" "ToggleFloatingPanes")
+    (bind "enter" "ToggleFocusFullscreen")
   ]
   ++ map tabBind (lib.range 1 9);
 
