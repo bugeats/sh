@@ -6,7 +6,6 @@
     flake-utils.url = "github:numtide/flake-utils";
     colors.url = "github:bugeats/colors";
     hx.url = "github:bugeats/hx";
-    zellij-nix.url = "github:a-kenji/zellij-nix";
   };
 
   outputs =
@@ -27,7 +26,6 @@
         rgbcolors = colors.rgb;
 
         hx = inputs.hx.packages.${system}.default;
-        zellij = inputs.zellij-nix.packages.${system}.default;
       in
       rec {
         packages.fish-config = import ./fish { inherit pkgs hexcolors system; };
@@ -47,7 +45,7 @@
 
         packages.zj = pkgs.writeShellApplication {
           name = "zj";
-          runtimeInputs = [ zellij ];
+          runtimeInputs = [ pkgs.zellij ];
           runtimeEnv.ZELLIJ_CONFIG_DIR = "${packages.zellij-config}";
           text = ''
             exec zellij attach --create "$(basename "$PWD")" "$@"
@@ -68,7 +66,7 @@
             pkgs.mergiraf
             pkgs.gitui
             hx
-            zellij
+            pkgs.zellij
             packages.zj
           ];
           runtimeEnv = {
