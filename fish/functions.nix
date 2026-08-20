@@ -74,15 +74,15 @@ system: {
   '';
 
   mastodon = ''
-    ssh ssh://chadwick@mastodon.taho.it.com:8623 -t 'nix run github:bugeats/sh'
+    ssh ssh://chadwick@mastodon.taho.it.com:8623 -t 'nix run github:bugeats/sh --refresh'
   '';
 
   saturn = ''
-    ssh chadwick@saturn.local -t 'nix run github:bugeats/sh'
+    ssh -p 2222 chadwick@saturn.local -t 'nix run github:bugeats/sh --refresh'
   '';
 
   bibi = ''
-    ssh chadwick@bibi.local -t 'nix run github:bugeats/sh'
+    ssh chadwick@bibi.local -t 'nix run github:bugeats/sh --refresh'
   '';
 
   claude = ''

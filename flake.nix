@@ -26,6 +26,22 @@
         rgbcolors = colors.rgb;
 
         hx = inputs.hx.packages.${system}.default;
+
+        devStack = [
+          hx
+          pkgs.delta
+          pkgs.fish
+          pkgs.gh
+          pkgs.gh-dash
+          pkgs.git
+          pkgs.git-lfs
+          pkgs.gitui
+          # pkgs.lumen # diff viewer
+          pkgs.mergiraf
+          pkgs.starship
+          pkgs.tmux
+          pkgs.zellij
+        ];
       in
       rec {
         packages.fish-config = import ./fish { inherit pkgs hexcolors system; };
@@ -54,19 +70,7 @@
 
         packages.default = pkgs.writeShellApplication {
           name = "sh-bootstrap";
-          runtimeInputs = [
-            pkgs.fish
-            pkgs.starship
-            pkgs.tmux
-            pkgs.git
-            pkgs.git-lfs
-            pkgs.delta
-            pkgs.gh
-            pkgs.gh-dash
-            pkgs.mergiraf
-            pkgs.gitui
-            hx
-            pkgs.zellij
+          runtimeInputs = devStack ++ [
             packages.zj
           ];
           runtimeEnv = {
