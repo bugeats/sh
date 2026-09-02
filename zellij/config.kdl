@@ -1,6 +1,12 @@
-default_shell "fish"
+attach_to_session true
+default_cwd "~/"
 default_layout "disable-status-bar"
+default_shell "fish"
+disable_session_metadata true
 mouse_mode true
 pane_frames true
 scroll_buffer_size 200000
+session_name "SCRATCH"
+session_serialization false
+show_startup_tips false
 theme "melanin"
