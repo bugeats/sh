@@ -29,7 +29,7 @@ let
     (bind "e" "EditScrollback")
     (bind "d" "Detach")
     (bind "f" ''SwitchToMode "EnterSearch"; SearchInput 0'')
-    (bind "0" ''LaunchOrFocusPlugin "session-manager"'')
+    (bind "0" ''LaunchOrFocusPlugin "session-manager" { floating true; move_to_focused_tab true; }'')
     (bind "space" "ToggleFloatingPanes")
     (bind "enter" "ToggleFocusFullscreen")
   ]
