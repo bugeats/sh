@@ -36,7 +36,6 @@
           pkgs.git
           pkgs.git-lfs
           pkgs.gitui
-          # pkgs.lumen # diff viewer
           pkgs.mergiraf
           pkgs.starship
           pkgs.tmux
@@ -82,6 +81,8 @@
             GIT_CONFIG_GLOBAL = "${packages.git-config}";
             GITUI_CONFIG = "${packages.gitui-config}";
             ZELLIJ_CONFIG_DIR = "${packages.zellij-config}";
+            # Trailing colon keeps the compiled-in terminfo defaults
+            TERMINFO_DIRS = "${pkgs.alacritty.terminfo}/share/terminfo:";
           };
           text = builtins.readFile ./bootstrap.sh;
         };

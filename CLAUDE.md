@@ -10,6 +10,8 @@ Config modules come in two shapes: data modules (`starship.nix`, `git.nix`, `git
 
 Zellij comes from `nixpkgs.zellij` (the `github:a-kenji/zellij-nix` source build broke on darwin, and its patchable-plugins rationale was gone). `packages.zj` is the launcher (`zellij attach --create <cwd-basename>`), on the bootstrap PATH.
 
+The wrapper exports `TERMINFO_DIRS` pointing at `alacritty.terminfo` (a tiny nixpkgs output, not the terminal itself) so ssh sessions from alacritty work on hosts that lack the `alacritty-direct` entry.
+
 Color values from `github:bugeats/colors` are extracted as both `hexcolors` (for text-format configs) and `rgbcolors` (for zellij's `R G B` theme format).
 
 ## Constraints
