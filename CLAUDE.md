@@ -1,12 +1,12 @@
 # sh
 
-Portable shell environment launched via `nix run github:bugeats/sh --refresh`. Bundles fish, starship, tmux, zellij, git, gitui, and helix with generated config into a single reproducible package.
+Portable shell environment launched via `nix run github:bugeats/sh --refresh`. Bundles fish, starship, tmux, zellij, git, jj, gitui, and helix with generated config into a single reproducible package.
 
 ## Architecture
 
 Each config is an independent flake output package (`packages.*-config`), built to its own nix store path. The `packages.default` wrapper sets env vars pointing to these store paths and bundles all runtime dependencies on PATH. Fish and gitui lack dedicated config env vars, so `bootstrap.sh` symlinks those into `~/.config/` (persisted across sessions; originals backed up with `.bugeats-was-here` suffix on first run).
 
-Config modules come in two shapes: data modules (`starship.nix`, `git.nix`, `gitui.nix`) return pure content from shared inputs (colors); directory modules (`fish/`, `zellij/`) encapsulate config assembly via `default.nix`. The `zellij/` directory concatenates static KDL (`config.kdl`), generated keybinds (loop in `default.nix`), and generated theme (`theme.nix`). `config.kdl` sets `default_layout "disable-status-bar"`, a zellij built-in that keeps the top tab-bar and drops the bottom status bar. Keybinds are documented in [docs/zellij-keybinds.md](docs/zellij-keybinds.md).
+Config modules come in two shapes: data modules (`starship.nix`, `git.nix`, `jj.nix`, `gitui.nix`) take the flake's `configInputs` record (colors, identity) and return pure content, TOML-shaped ones as attrsets rendered by `pkgs.formats.toml`; directory modules (`fish/`, `zellij/`) encapsulate config assembly via `default.nix`. The `zellij/` directory concatenates static KDL (`config.kdl`), generated keybinds (loop in `default.nix`), and generated theme (`theme.nix`). `config.kdl` sets `default_layout "disable-status-bar"`, a zellij built-in that keeps the top tab-bar and drops the bottom status bar. Keybinds are documented in [docs/zellij-keybinds.md](docs/zellij-keybinds.md).
 
 Zellij comes from `nixpkgs.zellij` (the `github:a-kenji/zellij-nix` source build broke on darwin, and its patchable-plugins rationale was gone). `packages.zj` is the launcher (`zellij attach --create <cwd-basename>`), on the bootstrap PATH.
 
@@ -30,4 +30,6 @@ Files must be git-tracked before `nix build` can read them.
 
 ## Current Focus
 
-Retire tmux. Zellij is the settled daily driver; tmux remains in `flake.nix` `runtimeInputs` and the `tmux-here`/`tmux-hack` fish functions — remove once confident.
+Retire tmux. Zellij is the settled daily driver; tmux remains in `flake.nix` `devStack` and the `TMUX` branch of the `cls` fish function — remove once confident.
+
+Parked: make the flake usable by other people. Identity lives in `configInputs` in `flake.nix` today; the candidate next step is a per-machine identity file layered over the store config (git `[include]`, `JJ_CONFIG` path list).

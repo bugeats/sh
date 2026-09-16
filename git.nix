@@ -1,4 +1,4 @@
-hexcolors:
+{ hexcolors, identity }:
 
 ''
   [alias]
@@ -66,6 +66,6 @@ hexcolors:
       enabled = true
 
   [user]
-      name = Chadwick Dahlquist
-      email = chadwick@bugeats.net
+      name = ${identity.name}
+      email = ${identity.email}
 ''

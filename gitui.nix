@@ -1,4 +1,4 @@
-hexcolors:
+{ hexcolors, ... }:
 
 ''
   (

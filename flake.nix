@@ -25,7 +25,17 @@
         hexcolors = colors.hex;
         rgbcolors = colors.rgb;
 
+        configInputs = {
+          inherit hexcolors;
+          identity = {
+            name = "Chadwick Dahlquist";
+            email = "chadwick@bugeats.net";
+          };
+        };
+
         hx = inputs.hx.packages.${system}.default;
+
+        toml = pkgs.formats.toml { };
 
         devStack = [
           hx
@@ -36,6 +46,7 @@
           pkgs.git
           pkgs.git-lfs
           pkgs.gitui
+          pkgs.jujutsu
           pkgs.mergiraf
           pkgs.starship
           pkgs.tmux
@@ -45,15 +56,15 @@
       rec {
         packages.fish-config = import ./fish { inherit pkgs hexcolors system; };
 
-        packages.starship-config = pkgs.runCommand "starship-config" { nativeBuildInputs = [ pkgs.yj ]; } ''
-          echo '${builtins.toJSON (import ./starship.nix hexcolors)}' | yj -jt > $out
-        '';
+        packages.starship-config = toml.generate "starship.toml" (import ./starship.nix configInputs);
 
-        packages.git-config = pkgs.writeText "gitconfig" (import ./git.nix hexcolors);
+        packages.git-config = pkgs.writeText "gitconfig" (import ./git.nix configInputs);
+
+        packages.jj-config = toml.generate "jj.toml" (import ./jj.nix configInputs);
 
         packages.gitui-config = pkgs.runCommand "gitui-config" { } ''
           mkdir -p $out
-          cp ${pkgs.writeText "theme.ron" (import ./gitui.nix hexcolors)} $out/theme.ron
+          cp ${pkgs.writeText "theme.ron" (import ./gitui.nix configInputs)} $out/theme.ron
         '';
 
         packages.zellij-config = import ./zellij { inherit pkgs rgbcolors; };
@@ -80,6 +91,7 @@
             STARSHIP_CONFIG = "${packages.starship-config}";
             GIT_CONFIG_GLOBAL = "${packages.git-config}";
             GITUI_CONFIG = "${packages.gitui-config}";
+            JJ_CONFIG = "${packages.jj-config}";
             ZELLIJ_CONFIG_DIR = "${packages.zellij-config}";
             # Trailing colon keeps the compiled-in terminfo defaults
             TERMINFO_DIRS = "${pkgs.alacritty.terminfo}/share/terminfo:";

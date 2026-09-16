@@ -30,6 +30,7 @@ let
         nix-dev
     end
 
+    COMPLETE=fish jj | source
     starship init fish | source
   '';
 in
