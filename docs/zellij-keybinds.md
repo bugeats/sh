@@ -7,4 +7,4 @@ Translation followed `~/nix/home/keybindings.nix`. Divergences from the tmux set
 - `w`/`q` (CloseTab/CloseFocus) have **no confirm prompt** — zellij's `Confirm` action only answers an already-displayed prompt; there's no analog to tmux's `confirm -p`.
 - Layout rotation (`,`/`.`) is dropped — zellij has no built-in layout presets, only user-defined swap layouts.
 - `Super+Alt+0` opens the session-manager plugin as a floating pane (replaces tmux's `choose-tree`); `Super+Alt+n` is intentionally unbound.
-- `1..9` bind native `GoToTab <n>` (positional index); the `disable-status-bar` layout pre-creates no tabs, so zellij's empty-name fallback (`tab/mod.rs:763`) renders each as `Tab #N`.
+- `1..9` bind native `GoToTab <n>` (positional index). Tabs are never named: zellij shows the pane's title while a tab holds a single pane (`single_pane_tab_name` in `tab/mod.rs`) and falls back to `Tab #N` once it holds more.

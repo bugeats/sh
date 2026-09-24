@@ -1,6 +1,4 @@
 attach_to_session true
-default_cwd "~/"
-default_layout "disable-status-bar"
 default_shell "fish"
 mouse_mode true
 pane_frames true

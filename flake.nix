@@ -6,6 +6,10 @@
     flake-utils.url = "github:numtide/flake-utils";
     colors.url = "github:bugeats/colors";
     hx.url = "github:bugeats/hx";
+    zjstatus = {
+      url = "github:dj95/zjstatus";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -34,6 +38,7 @@
         };
 
         hx = inputs.hx.packages.${system}.default;
+        zjstatus = inputs.zjstatus.packages.${system}.default;
 
         toml = pkgs.formats.toml { };
 
@@ -67,7 +72,14 @@
           cp ${pkgs.writeText "theme.ron" (import ./gitui.nix configInputs)} $out/theme.ron
         '';
 
-        packages.zellij-config = import ./zellij { inherit pkgs rgbcolors; };
+        packages.zellij-config = import ./zellij {
+          inherit
+            pkgs
+            hexcolors
+            rgbcolors
+            zjstatus
+            ;
+        };
 
         packages.zj = pkgs.writeShellApplication {
           name = "zj";
