@@ -8,7 +8,7 @@ Each config is an independent flake output package (`packages.*-config`), built 
 
 Config modules come in two shapes: data modules (`starship.nix`, `git.nix`, `jj.nix`, `gitui.nix`) take the flake's `configInputs` record (colors, identity) and return pure content, TOML-shaped ones as attrsets rendered by `pkgs.formats.toml`; directory modules (`fish/`, `zellij/`) encapsulate config assembly via `default.nix`. The `zellij/` directory concatenates static KDL (`config.kdl`), generated keybinds (loop in `default.nix`), and generated theme (`theme.nix`). `config.kdl` sets `default_layout "disable-status-bar"`, a zellij built-in that keeps the top tab-bar and drops the bottom status bar. Keybinds are documented in [docs/zellij-keybinds.md](docs/zellij-keybinds.md).
 
-Zellij comes from `nixpkgs.zellij` (the `github:a-kenji/zellij-nix` source build broke on darwin, and its patchable-plugins rationale was gone). `packages.zj` is the launcher (`zellij attach --create <cwd-basename>`), on the bootstrap PATH.
+Zellij comes from `nixpkgs.zellij` (the `github:a-kenji/zellij-nix` source build broke on darwin, and its patchable-plugins rationale was gone). `packages.zj` is the launcher (`zellij attach --create <cwd-basename>`), on the bootstrap PATH; `bootstrap.sh` execs into it, falling back to bare fish when already inside a zellij session.
 
 The wrapper exports `TERMINFO_DIRS` pointing at `alacritty.terminfo` (a tiny nixpkgs output, not the terminal itself) so ssh sessions from alacritty work on hosts that lack the `alacritty-direct` entry.
 

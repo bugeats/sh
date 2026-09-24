@@ -22,4 +22,9 @@ mkdir -p "$gitui_config"
 backup "$gitui_config/theme.ron"
 ln -sf "$GITUI_CONFIG/theme.ron" "$gitui_config/theme.ron"
 
-exec fish "$@"
+# Nested zellij sessions are refused, so a refresh from inside a pane gets a plain shell
+if [ -n "${ZELLIJ:-}" ]; then
+  exec fish "$@"
+fi
+
+exec zj "$@"
