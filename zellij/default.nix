@@ -50,10 +50,13 @@ let
   '';
 in
 
+# The session manager lists layouts from `layout_dir`, falling back to ~/.config/zellij/layouts
+# rather than ZELLIJ_CONFIG_DIR, so the option must name this store path outright.
 pkgs.runCommand "zellij-config" { } ''
   mkdir -p $out/layouts
   cat ${./config.kdl} \
       ${pkgs.writeText "keybinds.kdl" keybinds} \
       ${pkgs.writeText "theme.kdl" theme} > $out/config.kdl
-  cp ${pkgs.writeText "default.kdl" bar} $out/layouts/default.kdl
+  echo "layout_dir \"$out/layouts\"" >> $out/config.kdl
+  cp ${pkgs.writeText "bar.kdl" bar} $out/layouts/bar.kdl
 ''

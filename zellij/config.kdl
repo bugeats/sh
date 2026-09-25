@@ -1,4 +1,5 @@
 attach_to_session true
+default_layout "bar"
 default_shell "fish"
 mouse_mode true
 pane_frames true
