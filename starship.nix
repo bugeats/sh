@@ -15,26 +15,22 @@
   palette = "ui";
 
   palettes.ui =
-    let
-      dim = hexcolors.COLOR_UI_LEVEL_2_FG;
-      bright = hexcolors.COLOR_UI_LEVEL_3_FG;
-    in
-    {
-      black = dim;
-      red = dim;
-      green = dim;
-      blue = dim;
-      yellow = dim;
-      purple = dim;
-      cyan = dim;
-      white = dim;
-      bright-black = bright;
-      bright-red = bright;
-      bright-green = bright;
-      bright-blue = bright;
-      bright-yellow = bright;
-      bright-purple = bright;
-      bright-cyan = bright;
-      bright-white = bright;
+    with hexcolors; {
+      black = COLOR_ANSI_UI_BLACK;
+      red = COLOR_ANSI_UI_RED;
+      green = COLOR_ANSI_UI_GREEN;
+      blue = COLOR_ANSI_UI_BLUE;
+      yellow = COLOR_ANSI_UI_BLUE;
+      purple = COLOR_ANSI_UI_MAGENTA;
+      cyan = COLOR_ANSI_UI_CYAN;
+      white = COLOR_ANSI_UI_WHITE;
+      brigh-black = COLOR_ANSI_UI_BLACK_LIGHT;
+      brigh-red = COLOR_ANSI_UI_RED_LIGHT;
+      brigh-green = COLOR_ANSI_UI_GREEN_LIGHT;
+      brigh-blue = COLOR_ANSI_UI_BLUE_LIGHT;
+      brigh-yellow = COLOR_ANSI_UI_BLUE_LIGHT;
+      brigh-purple = COLOR_ANSI_UI_MAGENTA_LIGHT;
+      brigh-cyan = COLOR_ANSI_UI_CYAN_LIGHT;
+      brigh-white = COLOR_ANSI_UI_WHITE_LIGHT;
     };
 }
