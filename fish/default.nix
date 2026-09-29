@@ -26,10 +26,10 @@ let
       fish_color_quote = COLOR_STRING_FG; # quoted text like "abc"
       fish_color_redirection = COLOR_NORMAL_FG_ALT; # IO redirections like >/dev/null
       fish_color_end = COLOR_PUNCTUATION_FG; # process separators like ; and &
-      fish_color_error = COLOR_ERROR_FG; # syntax errors
+      fish_color_error = FG_WARN; # syntax errors
       fish_color_param = COLOR_KEYWORD_FG_ALT; # ordinary command parameters
       fish_color_valid_path = COLOR_STRING_FG_ALT; # parameters and redirection targets that are filenames (if the file exists)
-      fish_color_option = COLOR_UI_LEVEL_3_FG; # options starting with “-”, up to the first “--” parameter
+      fish_color_option = COLOR_NORMAL_FG_ALT; # options starting with “-”, up to the first “--” parameter
       fish_color_comment = COLOR_COMMENT_FG; # comments like ‘# important’
       fish_color_selection = COLOR_CURSOR_BG; # selected text in vi visual mode
       fish_color_operator = COLOR_PUNCTUATION_FG; # parameter expansion operators like * and ~
