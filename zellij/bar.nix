@@ -27,7 +27,7 @@ in
           format_left  "#[fg=$alt,bg=$bg1]{mode} #[fg=$bg3,bg=$bg2]▐#[fg=$fg3,bg=$bg3]{command_host}${edge "$bg3" "$bg2" "$fg2"}{session}${edge "$bg2" "$bg1" "$fg1"}{tabs}"
           format_space "#[bg=$bg1]"
 
-          tab_active    "#[fg=$fg1,bg=$bg1]▌#[fg=$fg2,bg=$bg1]{index}#[fg=$fg1,bg=$bg1]▐ {name} "
+          tab_active    "#[fg=$fg3,bg=$bg1]▌{index}▐ {name} "
           tab_normal    "#[fg=$fg1,bg=$bg1]▏{index}▕ {name} "
 
           // Modes beyond normal and locked are reached only by accident; naming
