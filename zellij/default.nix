@@ -23,7 +23,7 @@ let
     (bind "o" ''Resize "Increase Right"'')
     (bind "s" ''NewPane "Right"'')
     (bind "v" ''NewPane "Down"'')
-    (bind "t" "NewTab")
+    (bind "n" "NewTab")
     (bind "x" "Quit")
     (bind "w" "CloseTab")
     (bind "q" "CloseFocus")
