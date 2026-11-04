@@ -12,6 +12,13 @@ let
   bind = key: action: ''bind "Super Alt ${key}" { ${action}; }'';
   tabBind = n: bind (toString n) "GoToTab ${toString n}";
 
+  # No --layout: a new session takes `default_layout`, an existing one attaches as-is.
+  newSession = pkgs.writers.writeFish "zellij-new-session" ''
+    read -P 'session: ' name
+    and test -n "$name"
+    and zellij action switch-session $name
+  '';
+
   sharedBinds = [
     (bind "h" ''MoveFocus "Left"'')
     (bind "j" ''MoveFocus "Down"'')
@@ -32,6 +39,7 @@ let
     (bind "e" "EditScrollback")
     (bind "d" "Detach")
     (bind "f" ''SwitchToMode "EnterSearch"; SearchInput 0'')
+    (bind "n" ''Run "${newSession}" { floating true; close_on_exit true; name "new session"; width "40"; height "3"; }'')
     (bind "0" ''LaunchOrFocusPlugin "session-manager" { floating true; move_to_focused_tab true; }'')
     (bind "space" "ToggleFloatingPanes")
     (bind "enter" "ToggleFocusFullscreen")
